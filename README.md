@@ -1,6 +1,6 @@
 # LetMeAsk
 
-Site desenvolvido durante a Next Level Week da Rocketseat <https://app.rocketseat.com.br/node/mission-react-js>
+Site desenvolvido durante a Next Level Week da Rocketseat: <https://app.rocketseat.com.br/node/mission-react-js>
 ####
 <a href="https://letmeask-b0622.web.app/">![image](https://user-images.githubusercontent.com/48057126/131685794-1c95f6a4-dcd5-49bc-9b8d-983f955babdf.png)</a>
 
