@@ -21,42 +21,53 @@ Este é um website desenvolvido para estudo inicial do React, aplicando diversos
 
 ### ◼️ TSX
 
-O TSX é um extensão de síntaxe para o Typescript, adicionando a possibilidade de construção UI inicial da página dentro do Typescript
+O TSX é um extensão de síntaxe para o Typescript, adicionando a possibilidade de construção UI inicial da página dentro do Typescript.
+
 ```tsx
-const element = <h1>Hello, world!</h1>; //Exemplo retirado da documentação do React (https://pt-br.reactjs.org/docs/introducing-jsx.html)
+const name = 'Josh Perez';
+const element = <h1>Hello, {name}</h1>;
+ReactDOM.render(
+  element,
+  document.getElementById('root')
+); //Exemplo retirado da documentação do React (https://pt-br.reactjs.org/docs/introducing-jsx.html)
+```
+  Como podemos observar no exemplo, há a declaração da constante "name" que, em seguida, é utilizada no TSX dentro de chaves. Você poderia inserir qualquer expressão do Typescript no lugar de "name". Desta forma, a lógica de renderização e o desenvolvimento UI estão agregados, além disso, a separação de conceitos é realizada através da produção de Componentes React. Uma característica do JSX e TSX é a utilização do camelCase nos nomes das propriedades, assim, "class" deve ser escrita "className", "tabindex" deve ser "tabIndex" e entre outras.
+
+### ◼️ React Components
+
+Segundo a documentação oficial do React, os componentes, são como funções Javascript, podem receber entradas (denominadas "props") e retornam elementos React. A sua principal utilidade é justamente essa capacidade de dividir a UI em partes isoladas e retornando estes elementos, deste modo, permitindo a sua reutilização em diferentes momentos do código. Além das "props" os componentes podem ser estilizados individualmente. <br><br>Abaixo temos o exemplo de um componente Button, que pode, ou não, receber a class 'outlined' (para aplicar, ou não, determinada estilização), através da prop "isOutlined", que serve como condição para tal , além de que, este componente recebe como props, em conjunto da "isOutlined", os atributos de um "button" do HTML.
+
+```tsx
+import { ButtonHTMLAttributes } from 'react';
+
+import './styles.scss';
+
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  isOutlined?: boolean
+};
+
+export function Button({ isOutlined = false, ...props }: ButtonProps){
+  return(
+    <button className={`button ${isOutlined ? 'outlined' : ''}`}
+      {...props}
+    />
+  )
+}
 ```
 
-####
+### ◼️ React Hooks
 
-### ◼️ Biblioteca Swiper para exibição dos meus trabalhos em Portifólio
-
-![image](https://user-images.githubusercontent.com/48057126/131558013-20584811-ddc7-459b-b374-a4bd641dc480.png)
-
-####
-
-### ◼️ Biblioteca Scroll Reveal para exibição dos itens gradualmente de forma suave, com uma pequena transição
-
+Os hooks permitem a utilização de diversos recursos do React como o state, o effect e de criação própria, sem a necessidade da criação de classes para tal. No exemplo abaixo, temos a criação de um hook denominado UseAuth, que utiliza um contexto, de criação própria, denominado AuthContext e o hook useContext do react, podendo ser utilizado no código para a autenticação dos usuários.
 ```js
-const scrollReveal = ScrollReveal({
-  origin: 'top',
-  distance: '30px',
-  duration: 700,
-  reset: true
-})
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
 
-scrollReveal.reveal(
-  `#home .text, #home .scroll-down,
-  #about .title, #about .bio, #about .paragraph-1, #about .paragraph-2,
-  #portfolio .text, .swiper-container,
-  #contact .text, #contact .links, #contact form
-  `,
-  { interval: 100 }
-)
+export function useAuth() {
+  const value = useContext(AuthContext);
+  return value;
+}
 ```
-### ◼️ Envio de E-mail com o PHPMailer
-![image](https://user-images.githubusercontent.com/48057126/131681864-b294b329-9838-469e-ae3a-3e7152c63d6b.png)
 
+### ◼️ Além disso, apresenta responsividade para os diversos dispositivos e utiliza os serviços de banco de dados e hosting do Firebase
 
-### ◼️ Além disso, apresenta responsividade para os diversos dispositivos
-
-![image](https://user-images.githubusercontent.com/48057126/131559653-3b12b7f1-46bf-4842-a236-cf76ecad0665.png)
+![image](https://user-images.githubusercontent.com/48057126/131711105-36f1a79e-befb-49e6-8626-f6abd4f845ca.png)
